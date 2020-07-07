@@ -1,0 +1,204 @@
+---
+title: "Basic arithmetic in R"
+output: 
+  learnr::tutorial:
+    theme: paper
+    highlight: default
+runtime: shiny_prerendered
+author: Rob Knell
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Arithmetic operators
+
+R uses the standard arithmetic operators to add, multiply etc. and these are:
+
+| **Operator** | **What it does**      |
+|:-------------|:----------------------|
+| +            | Addition              |
+| -            | Subtraction           |
+| *            | Multiply              |
+| /            | Divide                |
+| ^            | Raise to the power of |
+
+All you have to do to carry out basic arithmetic in R is to type numbers and operators as you might with a calculator. If these are submitted to the console it will print an answer.
+
+```{r}
+25 + 3
+```
+
+```{r}
+8 / 2
+```
+
+```{r}
+16 ^ 0.5
+```
+<br><br><br>
+
+### Arithmetic Exercises 
+
+Write the R code required to add twenty seven and six:
+
+```{r 27_plus_6, exercise=TRUE}
+
+```
+
+```{r 27_plus_6-solution}
+27 + 6 
+```
+
+Write the R code required to subtract eight from nineteen:
+
+```{r 19_minus_8, exercise=TRUE}
+
+```
+
+```{r 19_minus_8-solution}
+19 - 8
+```
+
+Write the R code required to add calculate 4 raised to the power of three and a half:
+
+```{r 4_to_the_power_of, exercise=TRUE}
+
+```
+
+```{r 4_to_the_power_of-solution}
+4 ^ 3.5
+```
+
+## Order of calculations
+
+When given some code with more than one operator, R carries out the operations in the order:
+
+1) Parentheses: if something is within brackets (or parentheses) it's done first, then:
+1) Exponents (things raised to the power of something), then:
+2) Multiply
+3) Divide
+4) Addition
+5) Subtraction in that order.
+
+So `2+3*8` will give the result of `3*8` plus `2`, or `24 + 2`, rather than `3+2` multiplied by `8`. In other words the answer to `2+3*8` is `26`, not `40`. To make R calculate `3+2` and then multiply that by `8` we can use brackets (or parentheses if you're American), so `(3+2)*8` should return a value of 40.
+
+Let's check that.
+
+```{r echo = TRUE}
+2 + 3 * 8
+```
+
+```{r  echo = TRUE}
+(2 + 3) * 8
+```
+
+Here's a more complex example. Let's say we want to calculate 
+
+$$  23 + \frac{12 \times 0.66^2}{\left( 1 + 3 \right) ^ {0.5}} $$
+
+If we just put these numbers into R as:
+
+```{r echo = TRUE}
+23 + 12 * 0.66^2 / 1 + 3^0.5
+```
+
+We get one answer, but it's the wrong one. This is because R is calculating `3^0.5` and then adding 1. What we want to do, as indicated by the brackets in the formula, is add `1+3` and then raise that sum to the power 0.5. We can fix this easily by bracketing this off:
+
+```{r  echo = TRUE}
+23 + 12 * 0.66^2 / (1 + 3)^0.5
+```
+
+**Top tip** there are lots of helpful mnemonics to make it easier to remember the order of operations, for example **P**lease **E**xcuse **M**y **D**ear **A**unt **S**ally --- **P**arentheses **E**xponents **M**ultiplication **D**ivision **A**ddition **S**ubtraction.
+
+<br><br><br>
+
+### Order of calculations exercises
+
+Use R to calculate
+
+$$ 23 + \frac{\left( 12 \times 0.66 \right)^2}{1 + 3  ^ {0.5}} $$
+```{r order1, exercise = TRUE}
+
+```
+
+```{r order1-solution}
+23 + (12 * 0.66)^2 / (1 + 3 ^ 0.5)
+```
+
+Now use it to calculate
+
+$$ \sqrt{\left( 120 - 16 \right)} + \frac{2 * \left(3*2 \right)}{12} $$
+
+
+```{r order2, exercise = TRUE}
+
+```
+
+<!-- <div id="order2-hint"> -->
+<!-- Don't forget that $5 ^ {0.5} = \sqrt{5}$ -->
+
+<!-- Are all the brackets in the original equation necessary? -->
+<!-- </div> -->
+
+```{r order2-hint-1}
+# Raising something to the power 0.5 is the same as taking its square root
+```
+
+```{r order2-hint-2}
+
+# There are lots of ways of doing this
+
+# Simplest
+(120 - 16) ^ 0.5 + 2 * 3 * 2 / 12
+
+# If you want to be sure (when in doubt, brackets are your friend
+(120 - 16) ^ 0.5 + (2 * 3 * 2) / 12
+
+# Using sqrt instead of ^0.5
+sqrt(120-16) + 2 * 3 * 2/12
+```
+
+
+```{r order2-solution}
+
+# Simplest solution
+(120 - 16) ^ 0.5 + 2 * 3 * 2 / 12
+```
+
+
+
+## Arithmetic Quiz
+
+
+
+```{r quiz, echo = FALSE}
+quiz(
+  question("Which of the following return the answer 25?",
+    answer("`19 + 12 * 0.5`", correct = TRUE),
+    answer("`(19 + 12) * 0.5`"),
+    answer("`19 + (12 * 0.5)`", correct = TRUE),
+    answer("`6^2 - 9`")
+  ),
+  question("Which of the following return a positive answer?",
+    answer("`11 * (4 - 11)`"),
+    answer("`11 * 4 - 11`", correct = TRUE),
+    answer("`(-0.8)^2`", correct = TRUE),
+    answer("`-0.8 ^ 2`", message = "This one is a little tricky: R counts the minus sign before 0.8 as an arithmetic operator so it returns the answer -0.64")
+  ),
+    question("Which of the following is the same as the code `17 + 0.33^2 * 1/5`?",
+    answer("$17 + \\sqrt{0.33} \\times \\frac{1}{5}$"),
+    answer("`(17 + 0.33 ^2) * 1/5`"),
+    answer("$17 + 0.33^{2 + \\frac{1}{5}}$"),
+    answer("$17 + 0.33^{2} \\times \\frac{1}{5}$", correct = TRUE),
+    answer("$\\left(17 + 0.33\\right) ^ {2} \\times \\frac{1}{5}$"),
+    answer("`17 + (0.33 * 0.33) * 1/5`", correct = TRUE)
+  )
+)
+```
+
+
+

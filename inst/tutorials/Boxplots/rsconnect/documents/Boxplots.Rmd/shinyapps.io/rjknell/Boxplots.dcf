@@ -1,0 +1,12 @@
+name: Boxplots
+title: Boxplots
+username:
+account: rjknell
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2278346
+bundleId: 3130206
+url: https://rjknell.shinyapps.io/Boxplots/
+when: 1589178070.81286
+asMultiple: FALSE
+asStatic: FALSE
