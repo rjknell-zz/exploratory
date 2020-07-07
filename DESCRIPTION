@@ -1,11 +1,10 @@
-Package: TestTutorial
+Package: BiostatsExploratory
 Type: Package
-Title: LearnR test tutorials
+Title: "LearnR Exploratory Analysis and Descriptive Statistics Tutorials"
 Version: 0.1.0
 Author: Rob Knell
 Maintainer: <r.knell@qmul.ac.uk>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: Copyright Rob Knell
+Description: Four learnr tutorials on basic data exploration and descriptive statistics. Subjects covered are frequency histograms, basic descriptive statistics, boxplots and scatterplots. Basic knowledge of R is assumed.
+License: Creative Commons Attribution-NonCommercial 4.0 International License
 Encoding: UTF-8
 LazyData: true
