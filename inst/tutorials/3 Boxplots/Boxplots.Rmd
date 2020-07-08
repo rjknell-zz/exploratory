@@ -1,5 +1,5 @@
 ---
-title: "Exploratory Data  Analysis 3: Boxplots"
+title: "Exploratory Analysis 3: Boxplots"
 output: 
   learnr::tutorial:
     progressive: true
@@ -9,15 +9,18 @@ output:
     code_folding: hide
 runtime: shiny_prerendered
 author: Rob Knell
+description: >
+    Boxplots are an important tool for visualising data, 
+    especially when there are multiple variables or groups wthin a 
+    variable. Learn how to draw them in R and how to interpret them.
 ---
 
 ```{r setup, include=FALSE}
 library(learnr)
 
 knitr::opts_chunk$set(echo = TRUE)
-#worldbank <- TestTutorial::worldbank
-# load("worldbank.rda")
-worldbank <- read.csv("worldbank.csv")
+
+worldbank <- read.csv("http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/worldbank.csv")
 
 
 
@@ -36,7 +39,7 @@ Just to recap the video content, let's look at the data on population growth fro
 
 To load the data into R:
 
-```{r}
+```{r eval = FALSE}
 worldbank <- read.csv(
   "http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/worldbank.csv"
 )

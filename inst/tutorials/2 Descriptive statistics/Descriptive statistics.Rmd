@@ -9,6 +9,10 @@ output:
     code_folding: hide
 runtime: shiny_prerendered
 author: Rob Knell
+description: >
+    This tutorial takes you through the most important descriptive 
+    statistics, covering the mean and median as well as the variance,
+    standard deviation and inter-quartile range.
 ---
 
 ```{r setup, include=FALSE}
@@ -181,7 +185,13 @@ In the `height` data frame there is another variable called "phagocytic" which i
 
 *TIP* the `phagocytic` variable contains some missing data (`NA`). The default option for both the `mean()` and `median()` functions when presented with missing data is just to return `NA` and not calculate anything. If you want to get the mean or median calculated from the data that are present, you have to add this argument: `na.rm = TRUE` to your function call, so you'd have something like `median(my_variable_name, na.rm=TRUE)`. 
 
-```{r mean3, exercise = TRUE}
+```{r prepare-height}
+height <- read.csv(
+  "http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/body_height_immunity.csv"
+  )
+```
+
+```{r mean3, exercise = TRUE, exercise.setup = "prepare-height"}
 
 ```
 
@@ -219,7 +229,7 @@ Let's have a look at the shape of the `phagocytic` variable. Use the `hist()` fu
 
 Have a look at the histograms tutorial if you're really stuck and can't remember anything about how `hist()` works.
 
-```{r mean4, exercise = TRUE, fig.height = 5, fig.width =4}
+```{r mean4, exercise = TRUE, fig.height = 5, fig.width =4, exercise.setup = "prepare-height"}
 
 
 
@@ -396,7 +406,7 @@ summary(counts)
 
 Let's go back to our data on lysozyme activity. Use `var()` and `sd()` to calculate the variance and standard deviation of these data, and then use `IQR()` to calculate the interquartile range.
 
-```{r spread1, exercise = TRUE}
+```{r spread1, exercise = TRUE, exercise.setup = "prepare-height"}
 
 ```
 
@@ -428,7 +438,7 @@ IQR(height$lysozyme)
 
 Now use `summary()` to tell you what the values are for the quartiles and the median for the lysozyme data.
 
-```{r spread2, exercise = TRUE}
+```{r spread2, exercise = TRUE, exercise.setup = "prepare-height"}
 
 ```
 
@@ -472,7 +482,7 @@ quiz(
 
 Now use `summary()` to find out the quartiles for the phagocytic activity variable.
 
-```{r spread3, exercise = TRUE}
+```{r spread3, exercise = TRUE, exercise.setup = "prepare-height"}
 
 ```
 

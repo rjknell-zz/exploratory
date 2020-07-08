@@ -9,6 +9,10 @@ output:
     code_folding: hide
 runtime: shiny_prerendered
 author: Rob Knell
+description: >
+  Learn how to draw and use frequency histograms in R to 
+  understand the distribution of your data. Become 
+  familiar with the more common kinds of distribution.
 ---
 
 ```{r setup, include=FALSE}
@@ -16,6 +20,23 @@ library(learnr)
 require(plotrix)
 
 knitr::opts_chunk$set(echo = TRUE)
+
+
+# #Load longevity dataset
+# longevity <- read.csv("http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/longevity.csv") 
+# 
+# #Make order a factor
+# longevity$order <- as.factor(longevity$order) 
+# 
+# #Subset out the artiodactyls
+# artiodactyls <- subset(
+#   longevity, 
+#   order == "Artiodactyla") 
+# 
+# parrots <- subset(
+#   longevity,
+#   order == "Psittaciformes")
+
 ```
 
 ## What is a frequency histogram?
@@ -24,7 +45,7 @@ A frequency histogram is a way of displaying the data in a single variable which
 
 Before you start this tutorial, you're recommended to watch this video which explains some of the basics.
 
-![](https://youtu.be/94Op11LSn7E)
+![](https://youtu.be/bQQsbmeungc)
 
 The simplest frequency histograms are those where the data are organised on an *ordinal* scale: one with discrete values that have a natural order to them. One example might be data which are collected in a survey and which are scored on a *Likert Scale* --- this is a scale where a respondent is asked to express how much the agree or disagree with a particular statement, usually on a five or seven point scale. If you've spent more than 30 seconds as a student you've most likely been asked to fill one or more of these in.  Here are some data from a fictional survey of attitudes towards conservation:
 
@@ -198,7 +219,13 @@ Aha, it's the hippopotamus. This makes sense because hippos are quite unique ani
 
 You've seen that R makes it easy to generate frequency histograms with the `hist()` function. See if you can draw a frequency histogram like the one for artiodactyls but this time for a completely different order of animals, the Psittaciformes, otherwise known as the parrots. The longevity dataset has data on maximum life span for 72 species of parrot, and we can generate a new data frame just for these birds using `subset()`, just like we did with the artiodactyls. Psittaciformes is a bit much to type so we'll just call this one "parrots".
 
-```{r}
+```{r prepare-histograms}
+#Load longevity dataset
+longevity <- read.csv("http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/longevity.csv") 
+
+#Make order a factor
+longevity$order <- as.factor(longevity$order) 
+
 parrots <- subset(
   longevity,
   order == "Psittaciformes")
@@ -212,7 +239,7 @@ Now try to draw a frequency histogram. You can use the code we used above but yo
 
 
 
-```{r histogram1, exercise = TRUE, fig.height = 4, fig.width = 5}
+```{r histogram1, exercise = TRUE, exercise.setup = "prepare-histograms"}
 
 ```
 
@@ -271,7 +298,8 @@ One thing you might have noticed is that `hist()` drew the two histograms slight
 
 See if you can redraw your histogram, but this time using 5-year bins, with a maximum of 80 and a minimum of zero.
 
-```{r histogram2, exercise = TRUE, fig.height = 4, fig.width = 5}
+
+```{r histogram2, exercise = TRUE, exercise.setup = "prepare-histograms"}
 
 ```
 
@@ -312,8 +340,7 @@ hist(parrots$maximum_lifespan_yr,
 )
 ```
 
-That's interesting, and gives a rather different pattern to the one with the wider bins that we looked at before. There seems to be rather more structure to the dataset than was visible previously, and in particular there seem to be two peaks: one at around 25 to 30 years and a second, lower one at around 40 to 50 years. When we see a *bimodal* dataset like this it often indicates that there is some underlying structure in the data, with some group or groups that are somewhat different from the rest. In this case the obvious place to look is in the taxonomic structure of the order: the parrots are a diverse group of birds and it might be that the second peak we see in the histogram
-is associated with variablity within the order. Here's a "stacked histogram" with the three big families of the Psittaciformes shown in different colours. I'm importing an edited version of the parrots data with the families added here, and I'm using a function called `histStack()` from the `plotrix` package to draw this graph.
+That's interesting, and gives a rather different pattern to the one with the wider bins that we looked at before. There seems to be rather more structure to the dataset than was visible previously, and in particular there seem to be two peaks: one at around 25 to 30 years and a second, lower one at around 40 to 50 years. When we see a *bimodal* dataset like this it often indicates that there is some underlying structure in the data, with some group or groups that are somewhat different from the rest. In this case the obvious place to look is in the taxonomic structure of the order: the parrots are a diverse group of birds and it might be that the second peak we see in the histogram is associated with variablity within the order. Here's a "stacked histogram" with the three big families of the Psittaciformes shown in different colours. I'm importing an edited version of the parrots data with the families added here, and I'm using a function called `histStack()` from the `plotrix` package to draw this graph.
 
 ```{r fig.height = 4, fig.width = 5, fig.cap = "**Figure 3** Stacked histogram of maximum ages for the parrots showing the three main families"}
 
